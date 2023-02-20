@@ -5,6 +5,11 @@ Simple currency converter. Includes two pages:
 - Exchange list
 - Converter
 
+## Screencast
+
+Screencast schowcasing app: https://drive.google.com/file/d/1JQPq9LvlRPcDmXWO5SIb1mlZuz35i6_M/view?usp=share_link
+You can find deployed version at: https://currency-formatter.vercel.app/
+
 ## Presequences
 
 - Specify env variables for CurrencyAPI
@@ -50,3 +55,5 @@ In the project directory, you can run:
 - Styled-components
 - React-toastify
 - Typescript
+
+CI/CD pipeline automatically runs linter checks on push

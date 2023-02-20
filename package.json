@@ -39,6 +39,7 @@
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "lint": "run-p lint:*",
+    "prettier": "prettier --write 'src/**/*.{js,ts,tsx}'",
     "lint:types": "tsc",
     "lint:js": "eslint --ext .ts --ext .tsx src --fix"
   },

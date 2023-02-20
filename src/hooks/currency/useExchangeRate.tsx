@@ -27,50 +27,51 @@ export const useExchangeRate = ({
 
   const [isQueryEnabled, setIsQueryEnabled] = useState<boolean>(false);
 
-  const { error, data, refetch, isFetching } = useQuery<ExchangeRateInfoType>(
-    QUERY_TYPES.ExchangeRate,
-    async () => {
-      const { exchangeInfo, lastUpdatedAt } = await currencyApiClient.latest({
-        baseCurrency,
-      });
-
-      return queryClient.setQueryData<ExchangeRateInfoType>(
-        QUERY_TYPES.ExchangeRate,
-        (old) => {
-          if (old) {
-            return {
-              lastUpdatedAt,
-              exchangeInfo: {
-                ...old.exchangeInfo,
-                [baseCurrency]: exchangeInfo[baseCurrency],
-              },
-            };
-          }
-
-          return {
-            exchangeInfo,
-            lastUpdatedAt,
-          };
-        },
-      );
-    },
-    {
-      enabled: useAsLazy ? isQueryEnabled : enabled,
-      refetchOnMount: false,
-      onError(err) {
-        const errorMessage = isAxiosError(err)
-          ? err.response?.data?.message ?? err.message
-          : 'Error while fetching currencies list';
-        toast.error(`Exchange rate: ${errorMessage}`, {
-          toastId: QUERY_TYPES.ExchangeRate,
+  const { error, data, refetch, isFetching, isLoading } =
+    useQuery<ExchangeRateInfoType>(
+      QUERY_TYPES.ExchangeRate,
+      async () => {
+        const { exchangeInfo, lastUpdatedAt } = await currencyApiClient.latest({
+          baseCurrency,
         });
+
+        return queryClient.setQueryData<ExchangeRateInfoType>(
+          QUERY_TYPES.ExchangeRate,
+          (old) => {
+            if (old) {
+              return {
+                lastUpdatedAt,
+                exchangeInfo: {
+                  ...old.exchangeInfo,
+                  [baseCurrency]: exchangeInfo[baseCurrency],
+                },
+              };
+            }
+
+            return {
+              exchangeInfo,
+              lastUpdatedAt,
+            };
+          },
+        );
       },
-      onSettled() {
-        setIsQueryEnabled(false);
+      {
+        enabled: useAsLazy ? isQueryEnabled : enabled,
+        refetchOnMount: false,
+        onError(err) {
+          const errorMessage = isAxiosError(err)
+            ? err.response?.data?.message ?? err.message
+            : 'Error while fetching currencies list';
+          toast.error(`Exchange rate: ${errorMessage}`, {
+            toastId: QUERY_TYPES.ExchangeRate,
+          });
+        },
+        onSettled() {
+          setIsQueryEnabled(false);
+        },
+        refetchInterval: 1000 * 10, // 10 sec
       },
-      refetchInterval: 1000 * 10, // 10 sec
-    },
-  );
+    );
 
   const triggerExchangeRate = useCallback(() => {
     if (enabled) {
@@ -83,13 +84,13 @@ export const useExchangeRate = ({
 
   return useMemo(
     () => ({
-      isExchageRateLoading: isFetching,
+      isExchageRateLoading: isFetching || isLoading,
       exchageRateError: error as AxiosError,
       exchangeRate: data?.exchangeInfo,
       lastUpdatedAt: data?.lastUpdatedAt,
       currentExchangeInfo: data?.exchangeInfo?.[baseCurrency],
       triggerExchangeRate,
     }),
-    [isFetching, data, baseCurrency, error, triggerExchangeRate],
+    [isFetching, data, baseCurrency, isLoading, error, triggerExchangeRate],
   );
 };

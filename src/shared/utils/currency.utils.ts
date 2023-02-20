@@ -65,7 +65,9 @@ export const getConvertedCurrenciesInfo = ({
     amount,
   )}`;
 
-  const toCurrencyText = `${amount * exchangeRate} ${getCurrencyPluralName(
+  const convertedAmount = (amount * exchangeRate).toFixed(5);
+
+  const toCurrencyText = `${convertedAmount} ${getCurrencyPluralName(
     toCurrency,
     exchangeRate,
   )}`;
