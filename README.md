@@ -1,7 +1,7 @@
 # Currency Converter
 
 Simple currency converter. 
-Includes two pages:__
+Includes two pages:
 
 - Exchange list
 - Converter
