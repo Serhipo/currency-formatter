@@ -1,6 +1,6 @@
 # Currency Converter
 
-Simple currency converter. 
+Simple currency converter.\
 Includes two pages:
 
 - Exchange list
