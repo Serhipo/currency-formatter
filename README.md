@@ -9,6 +9,9 @@ Includes two pages:
 ## Screencast
 
 - Screencast schowcasing app: https://drive.google.com/file/d/1JQPq9LvlRPcDmXWO5SIb1mlZuz35i6_M/view?usp=share_link
+
+https://user-images.githubusercontent.com/123413931/220113551-6d77cfbf-7713-4a91-8a9e-e861ad3d87f9.mp4
+
 - You can find deployed version at: https://currency-formatter.vercel.app/
 
 ## Presequences
