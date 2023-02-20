@@ -1,14 +1,15 @@
 # Currency Converter
 
-Simple currency converter. Includes two pages:
+Simple currency converter. 
+Includes two pages:__
 
 - Exchange list
 - Converter
 
 ## Screencast
 
-Screencast schowcasing app: https://drive.google.com/file/d/1JQPq9LvlRPcDmXWO5SIb1mlZuz35i6_M/view?usp=share_link
-You can find deployed version at: https://currency-formatter.vercel.app/
+- Screencast schowcasing app: https://drive.google.com/file/d/1JQPq9LvlRPcDmXWO5SIb1mlZuz35i6_M/view?usp=share_link
+- You can find deployed version at: https://currency-formatter.vercel.app/
 
 ## Presequences
 
