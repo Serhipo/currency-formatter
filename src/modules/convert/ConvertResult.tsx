@@ -35,11 +35,13 @@ const ConvertResult: React.FC = React.memo(() => {
       }),
     [currentExchangeInfo, amount, fromCurrency, toCurrency, lastUpdatedAt],
   );
+
   const showExchangeResult = currentExchangeInfo && currenciesInfo;
+  const showLoader = isExchageRateLoading && !currentExchangeInfo;
 
   return (
     <Wrapper>
-      {isExchageRateLoading ? (
+      {showLoader ? (
         <LoaderWrapper>
           <Loader />
         </LoaderWrapper>

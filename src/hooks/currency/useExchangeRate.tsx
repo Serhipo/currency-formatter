@@ -69,6 +69,7 @@ export const useExchangeRate = ({
         onSettled() {
           setIsQueryEnabled(false);
         },
+        cacheTime: 1000 * 60, // 1 min
         refetchInterval: 1000 * 10, // 10 sec
       },
     );

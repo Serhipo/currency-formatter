@@ -42,8 +42,9 @@ const ConvertForm: React.FC = () => {
     register,
     control,
     watch,
-    formState: { errors },
+    formState: { errors, isDirty },
     setValue,
+    reset,
     handleSubmit,
   } = useForm<ConvertFormValues>({
     defaultValues: {
@@ -57,8 +58,12 @@ const ConvertForm: React.FC = () => {
   const currentFromCurrency = watch('fromCurrency');
 
   const onChangeCurrencyClick = React.useCallback(() => {
-    setValue('fromCurrency', toCurrency);
-    setValue('toCurrency', fromCurrency);
+    setValue('fromCurrency', toCurrency, {
+      shouldDirty: true,
+    });
+    setValue('toCurrency', fromCurrency, {
+      shouldDirty: true,
+    });
     setConvertFormValues((prev) => ({
       ...prev,
       fromCurrency: toCurrency,
@@ -68,13 +73,19 @@ const ConvertForm: React.FC = () => {
 
   const onSubmit = React.useCallback(() => {
     triggerExchangeRate();
-  }, [triggerExchangeRate]);
+    reset(
+      {},
+      {
+        keepValues: true,
+      },
+    );
+  }, [triggerExchangeRate, reset]);
 
   React.useEffect(() => {
-    if (!currentExchangeInfo && !isExchageRateLoading) {
+    if (isDirty) {
       onSubmit();
     }
-  }, [currentExchangeInfo, onSubmit, isExchageRateLoading]);
+  }, [isDirty, onSubmit]);
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
